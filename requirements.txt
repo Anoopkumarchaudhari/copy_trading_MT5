@@ -1,0 +1,9 @@
+# jb_copier relay server - pip requirements
+#
+# copy_server.py uses ONLY the Python standard library (argparse, hashlib, hmac,
+# html, http.server, json, logging, os, secrets, ssl, threading, time, urllib).
+# There are no third-party packages. This file is intentionally empty so that
+# `pip install -r requirements.txt` succeeds on any VPS and CI stays consistent.
+#
+# Runtime requirement: Python >= 3.8 (ThreadingHTTPServer needs 3.7+).
+# Check on the VPS with:  python3 --version

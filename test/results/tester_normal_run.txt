@@ -1,0 +1,21 @@
+D:\Strategy\docs\jb_copier\test\run_tester_test.py:56: SyntaxWarning: "\*" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\*"? A raw string is also an option.
+  f"Where-Object {{ $_.Path -like '{CLONE}\*' }}).Count")
+19:22:20.071 tester launched
+19:22:24.597 slave connected - running scenario
+19:22:28.657 MASTER t=  4.1s OPEN #9000005 BUY 0.10 @1.05, far below market (deviation guard must refuse)
+19:22:32.687 MASTER t=  8.1s OPEN #9000001 BUY 0.10 SL 0.5 TP 2.0
+19:22:40.821 MASTER t= 16.2s OPEN #9000002 SELL 0.20 SL 2.0 TP 0.5
+19:22:48.885 MASTER t= 24.3s MODIFY #9000001 SL 0.6 TP 1.9
+19:22:57.028 MASTER t= 32.4s PARTIAL #9000001 -> 0.06
+19:23:05.140 MASTER t= 40.5s MODIFY #9000002 TP removed
+19:23:13.314 MASTER t= 48.7s CLOSE #9000001
+19:23:21.442 MASTER t= 56.8s OPEN #9000003 BUY 0.10 opened 300 s ago (must be skipped)
+19:23:28.621 MASTER t= 64.0s GO OFFLINE (no pushes for 20 s, slave must freeze)
+19:23:48.631 MASTER t= 84.0s BACK ONLINE + OPEN #9000004 SELL 0.10
+19:23:58.827 MASTER t= 94.2s GROW #9000004 -> 0.30 (netting add)
+19:24:09.003 MASTER t=104.4s SHRINK #9000004 -> 0.12
+19:24:19.128 MASTER t=114.5s FLAT - everything closed
+19:24:31.353 scenario done - waiting for the tester to finish its day
+19:25:53.299 tester finished
+19:25:54.559 agent logs: ['D:\\Strategy\\mt5clone_c\\Tester\\Agent-127.0.0.1-3000\\logs\\20261017.log']
+exit 0

@@ -1,0 +1,11 @@
+{
+  "admin_key": "A-4XoZETzswo3OPPi0cOr8k2I6",
+  "channels": {
+    "main": {
+      "master_key": "M-uqS1vuft__XUMWqtWTufJf2O",
+      "slave_keys": [
+        "S-p7q1qiP0OlVmwjpNKnhJ4IA8"
+      ]
+    }
+  }
+}

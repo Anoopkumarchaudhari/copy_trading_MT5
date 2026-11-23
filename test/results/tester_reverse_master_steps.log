@@ -1,0 +1,17 @@
+19:26:31.219 tester launched
+19:26:35.245 slave connected - running scenario
+19:26:39.317 MASTER t=  4.1s OPEN #9000005 BUY 0.10 @1.05, far below market (deviation guard must refuse)
+19:26:43.366 MASTER t=  8.1s OPEN #9000001 BUY 0.10 SL 0.5 TP 2.0
+19:26:51.477 MASTER t= 16.2s OPEN #9000002 SELL 0.20 SL 2.0 TP 0.5
+19:26:59.609 MASTER t= 24.4s MODIFY #9000001 SL 0.6 TP 1.9
+19:27:07.729 MASTER t= 32.5s PARTIAL #9000001 -> 0.06
+19:27:15.853 MASTER t= 40.6s MODIFY #9000002 TP removed
+19:27:23.997 MASTER t= 48.8s CLOSE #9000001
+19:27:32.139 MASTER t= 56.9s OPEN #9000003 BUY 0.10 opened 300 s ago (must be skipped)
+19:27:39.259 MASTER t= 64.0s GO OFFLINE (no pushes for 20 s, slave must freeze)
+19:27:59.267 MASTER t= 84.0s BACK ONLINE + OPEN #9000004 SELL 0.10
+19:28:09.456 MASTER t= 94.2s GROW #9000004 -> 0.30 (netting add)
+19:28:19.648 MASTER t=104.4s SHRINK #9000004 -> 0.12
+19:28:29.815 MASTER t=114.6s FLAT - everything closed
+19:28:42.043 scenario done - waiting for the tester to finish its day
+19:30:04.025 tester finished
