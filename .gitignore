@@ -1,0 +1,8 @@
+# Relay keys and runtime files. The keys in copy_server.json grant control of your copier:
+# keep that file out of git and copy it to the VPS by hand.
+server/copy_server.json
+server/copy_server.log
+
+# Python
+__pycache__/
+*.pyc

@@ -17,7 +17,7 @@ python --version
 
 ## 2. Put the server file on the VPS
 Create a folder and copy ONLY this file into it from your PC
-(`D:\Strategy\docs\jb_copier\server\copy_server.py`). Over RDP: right-click copy the file on
+(`server\copy_server.py` from this repository). Over RDP: right-click copy the file on
 your PC, right-click paste inside the VPS Explorer window.
 ```powershell
 New-Item -ItemType Directory -Force C:\jb_copier
@@ -99,8 +99,8 @@ sudo mkdir -p /opt/jb_copier/server
 ## 2. Upload the server files
 From your PC (PowerShell), copy the two files to the VPS:
 ```powershell
-scp D:\Strategy\docs\jb_copier\server\copy_server.py   root@<VPS_IP>:/opt/jb_copier/server/
-scp D:\Strategy\docs\jb_copier\server\jb-copier.service root@<VPS_IP>:/opt/jb_copier/server/
+scp server\copy_server.py   root@<VPS_IP>:/opt/jb_copier/server/
+scp server\jb-copier.service root@<VPS_IP>:/opt/jb_copier/server/
 ```
 If you want to keep the keys you already generated locally, also copy `copy_server.json`.
 Otherwise the first run creates a new one with fresh random keys.

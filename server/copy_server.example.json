@@ -1,0 +1,11 @@
+{
+  "admin_key": "A-replace-me-dashboard-key",
+  "channels": {
+    "main": {
+      "master_key": "M-replace-me-master-key",
+      "slave_keys": [
+        "S-replace-me-slave-key-1"
+      ]
+    }
+  }
+}
