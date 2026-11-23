@@ -2,7 +2,7 @@
 #property version "1.00"
 void OnStart()
   {
-   int h = FileOpen("jbc_symscan.csv", FILE_WRITE | FILE_TXT | FILE_COMMON | FILE_ANSI);
+   int h = FileOpen("copier_symscan.csv", FILE_WRITE | FILE_TXT | FILE_COMMON | FILE_ANSI);
    FileWriteString(h, "symbol,path,digits,contract,vmin,vstep,stops,tick_age_s,bid,ask,spread_pts\r\n");
    string cand[];
    for(int i = 0; i < SymbolsTotal(false); i++)

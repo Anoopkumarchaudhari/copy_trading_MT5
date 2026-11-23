@@ -1,10 +1,10 @@
 //+------------------------------------------------------------------+
-//|                                                 JB_CopierNet.mqh |
-//|  HTTP transport shared by JB_CopyMaster and JB_CopySlave.         |
-//|  WEBREQUEST : MQL5 WebRequest - the server URL must be added in   |
-//|               Tools > Options > Expert Advisors > Allow WebRequest |
-//|  WININET    : Windows wininet.dll - no URL list, but the EA needs  |
-//|               "Allow DLL imports"; keeps the connection alive.     |
+//|                                                    CopierNet.mqh |
+//|  HTTP transport shared by CopyMaster and CopySlave.              |
+//|  WEBREQUEST : MQL5 WebRequest - the server URL must be added in  |
+//|               Tools > Options > Expert Advisors > Allow WebRequest|
+//|  WININET    : Windows wininet.dll - no URL list, but the EA needs|
+//|               "Allow DLL imports"; keeps the connection alive.   |
 //+------------------------------------------------------------------+
 #property strict
 
@@ -154,7 +154,7 @@ bool CCopierHttp::SendWinInet(const string method, const string path, const stri
   {
    if(m_session == 0)
      {
-      m_session = InternetOpenW("JBCopier", WININET_OPEN_DIRECT, 0, 0, 0);
+      m_session = InternetOpenW("MT5Copier", WININET_OPEN_DIRECT, 0, 0, 0);
       if(m_session == 0) { error = StringFormat("InternetOpen failed (%d) - is Allow DLL imports on?", kernel32::GetLastError()); return false; }
       int ct = 5000;
       InternetSetOptionW(m_session, WININET_OPT_CONNECT_TIMEOUT, ct, 4);

@@ -20,36 +20,36 @@ Create a folder and copy ONLY this file into it from your PC
 (`server\copy_server.py` from this repository). Over RDP: right-click copy the file on
 your PC, right-click paste inside the VPS Explorer window.
 ```powershell
-New-Item -ItemType Directory -Force C:\jb_copier
+New-Item -ItemType Directory -Force C:\mt5_copier
 ```
 If you want to keep the keys already in your EAs, also copy your local `copy_server.json`
 next to it. Otherwise the first run creates a new one with fresh random keys.
 
-Verify the file is the real server (about 370 lines, first lines mention JB Copier):
+Verify the file is the real server (about 370 lines, first lines mention MT5 Copier):
 ```powershell
-(Get-Content C:\jb_copier\copy_server.py | Measure-Object -Line).Lines
-Get-Content C:\jb_copier\copy_server.py -TotalCount 3
+(Get-Content C:\mt5_copier\copy_server.py | Measure-Object -Line).Lines
+Get-Content C:\mt5_copier\copy_server.py -TotalCount 3
 ```
 
 ## 3. First run (generates keys, verifies it starts)
 ```powershell
-cd C:\jb_copier
+cd C:\mt5_copier
 python copy_server.py --host 0.0.0.0 --port 8787
 ```
 A good start prints one line and then keeps running (does not return to the prompt):
 ```
-2026-11-23 12:00:00.000 INFO JB Copier relay v1.x on http://0.0.0.0:8787  channels: main
+2026-11-23 12:00:00.000 INFO MT5 Copier relay v1.x on http://0.0.0.0:8787  channels: main
 ```
 Press Ctrl+C to stop, then read the keys:
 ```powershell
-Get-Content C:\jb_copier\copy_server.json
+Get-Content C:\mt5_copier\copy_server.json
 ```
-Put `master_key` into JB_CopyMaster, a `slave_key` into each JB_CopySlave, keep `admin_key`
+Put `master_key` into CopyMaster, a `slave_key` into each CopySlave, keep `admin_key`
 for the dashboard.
 
 ## 4. Open the Windows firewall
 ```powershell
-netsh advfirewall firewall add rule name="JB Copier 8787" dir=in action=allow protocol=TCP localport=8787
+netsh advfirewall firewall add rule name="MT5 Copier 8787" dir=in action=allow protocol=TCP localport=8787
 ```
 Also open TCP 8787 in the VPS provider's cloud firewall / security group if it has one.
 
@@ -60,18 +60,18 @@ Find the python path first:
 ```
 Create a task that starts at boot as SYSTEM (replace the python path with yours):
 ```powershell
-schtasks /Create /F /TN "JB Copier" /SC ONSTART /RU SYSTEM /RL HIGHEST /TR "\"C:\Users\Administrator\AppData\Local\Programs\Python\Python314\python.exe\" C:\jb_copier\copy_server.py --host 0.0.0.0 --port 8787 --config C:\jb_copier\copy_server.json"
-schtasks /Run /TN "JB Copier"
-schtasks /Query /TN "JB Copier" /V /FO LIST
+schtasks /Create /F /TN "MT5 Copier" /SC ONSTART /RU SYSTEM /RL HIGHEST /TR "\"C:\Users\Administrator\AppData\Local\Programs\Python\Python314\python.exe\" C:\mt5_copier\copy_server.py --host 0.0.0.0 --port 8787 --config C:\mt5_copier\copy_server.json"
+schtasks /Run /TN "MT5 Copier"
+schtasks /Query /TN "MT5 Copier" /V /FO LIST
 ```
-Log file: `C:\jb_copier\copy_server.log`.
+Log file: `C:\mt5_copier\copy_server.log`.
 ```powershell
-Get-Content C:\jb_copier\copy_server.log -Tail 20 -Wait
+Get-Content C:\mt5_copier\copy_server.log -Tail 20 -Wait
 ```
 Stop / restart (after editing copy_server.json):
 ```powershell
-schtasks /End /TN "JB Copier"
-schtasks /Run /TN "JB Copier"
+schtasks /End /TN "MT5 Copier"
+schtasks /Run /TN "MT5 Copier"
 ```
 
 ## 6. Test from your PC
@@ -93,42 +93,42 @@ certificate (win-acme: https://www.win-acme.com, needs a domain pointing at the 
 ```bash
 sudo apt update && sudo apt install -y python3
 sudo useradd --system --create-home --shell /usr/sbin/nologin copier
-sudo mkdir -p /opt/jb_copier/server
+sudo mkdir -p /opt/mt5_copier/server
 ```
 
 ## 2. Upload the server files
 From your PC (PowerShell), copy the two files to the VPS:
 ```powershell
-scp server\copy_server.py   root@<VPS_IP>:/opt/jb_copier/server/
-scp server\jb-copier.service root@<VPS_IP>:/opt/jb_copier/server/
+scp server\copy_server.py   root@<VPS_IP>:/opt/mt5_copier/server/
+scp server\mt5-copier.service root@<VPS_IP>:/opt/mt5_copier/server/
 ```
 If you want to keep the keys you already generated locally, also copy `copy_server.json`.
 Otherwise the first run creates a new one with fresh random keys.
 
 ## 3. First run (generates keys, verifies it starts)
 ```bash
-sudo chown -R copier:copier /opt/jb_copier
-cd /opt/jb_copier/server
+sudo chown -R copier:copier /opt/mt5_copier
+cd /opt/mt5_copier/server
 sudo -u copier python3 copy_server.py --host 0.0.0.0 --port 8787
 ```
 Watch for the "listening" line, then press Ctrl+C. Print the keys:
 ```bash
-cat /opt/jb_copier/server/copy_server.json
+cat /opt/mt5_copier/server/copy_server.json
 ```
-Put `master_key` into JB_CopyMaster, a `slave_key` into each JB_CopySlave,
+Put `master_key` into CopyMaster, a `slave_key` into each CopySlave,
 and keep `admin_key` for the dashboard.
 
 ## 4. Install as a systemd service (auto-start, auto-restart)
 ```bash
-sudo cp /opt/jb_copier/server/jb-copier.service /etc/systemd/system/jb-copier.service
+sudo cp /opt/mt5_copier/server/mt5-copier.service /etc/systemd/system/mt5-copier.service
 sudo systemctl daemon-reload
-sudo systemctl enable --now jb-copier
-sudo systemctl status jb-copier --no-pager
+sudo systemctl enable --now mt5-copier
+sudo systemctl status mt5-copier --no-pager
 ```
 Logs:
 ```bash
-sudo journalctl -u jb-copier -f
-tail -f /opt/jb_copier/server/copy_server.log
+sudo journalctl -u mt5-copier -f
+tail -f /opt/mt5_copier/server/copy_server.log
 ```
 
 ## 5. Open the firewall
@@ -151,16 +151,16 @@ sudo apt install -y certbot
 sudo certbot certonly --standalone -d copier.yourdomain.com
 sudo setfacl -R -m u:copier:rX /etc/letsencrypt/live /etc/letsencrypt/archive
 ```
-Then edit `/etc/systemd/system/jb-copier.service`, add to `ExecStart`:
+Then edit `/etc/systemd/system/mt5-copier.service`, add to `ExecStart`:
 ```
 --cert /etc/letsencrypt/live/copier.yourdomain.com/fullchain.pem --key /etc/letsencrypt/live/copier.yourdomain.com/privkey.pem
 ```
-and run `sudo systemctl daemon-reload && sudo systemctl restart jb-copier`.
+and run `sudo systemctl daemon-reload && sudo systemctl restart mt5-copier`.
 Use `https://copier.yourdomain.com:8787/...` in the EAs and the WebRequest allow-list.
 
 ## Useful commands
 ```bash
-sudo systemctl restart jb-copier     # after editing copy_server.json
-sudo systemctl stop jb-copier
-sudo systemctl disable jb-copier
+sudo systemctl restart mt5-copier     # after editing copy_server.json
+sudo systemctl stop mt5-copier
+sudo systemctl disable mt5-copier
 ```

@@ -1,4 +1,4 @@
-# jb_copier relay server - pip requirements
+# mt5_copier relay server - pip requirements
 #
 # copy_server.py uses ONLY the Python standard library (argparse, hashlib, hmac,
 # html, http.server, json, logging, os, secrets, ssl, threading, time, urllib).

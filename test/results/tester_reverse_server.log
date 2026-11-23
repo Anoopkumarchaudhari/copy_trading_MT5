@@ -1,4 +1,4 @@
-2026-10-17 19:26:29.880 INFO JB Copier relay v1.00 on http://127.0.0.1:8787  channels: main
+2026-10-17 19:26:29.880 INFO MT5 Copier relay v1.00 on http://127.0.0.1:8787  channels: main
 2026-10-17 19:26:34.900 INFO [main] slave 'tester' connected from 127.0.0.1
 2026-10-17 19:26:34.904 INFO [main] slave 'tester' status: 10012289342|MetaQuotes-Demo|USD|100000.00|100000.00|0|0.00|waiting for master|
 2026-10-17 19:26:35.280 INFO [main] seq 1: 0 position(s) from master 1 (flat)

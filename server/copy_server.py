@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""JB Copier relay server.
+"""MT5 Copier relay server.
 
 The master EA pushes a snapshot of its open positions; slave EAs long-poll
 for the newest snapshot and reconcile their own positions against it.
@@ -158,7 +158,7 @@ def key_ok(given, allowed):
 # --------------------------------------------------------------------------
 class Handler(BaseHTTPRequestHandler):
     protocol_version = "HTTP/1.1"
-    server_version = "JBCopier/" + VERSION
+    server_version = "MT5Copier/" + VERSION
     channels = {}
     admin_key = ""
 
@@ -324,16 +324,16 @@ class Handler(BaseHTTPRequestHandler):
                 rows.append("<tr><td colspan=9>no slave has connected</td></tr>")
             rows.append("</table>")
         return f"""<!doctype html><html><head><meta charset="utf-8"><meta http-equiv="refresh" content="2">
-<meta name="viewport" content="width=device-width,initial-scale=1"><title>JB Copier</title><style>
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>MT5 Copier</title><style>
 body{{font:14px system-ui,sans-serif;margin:16px;background:#fff;color:#111}}
 table{{border-collapse:collapse;margin:6px 0 18px}}td,th{{border:1px solid #ccc;padding:3px 8px;text-align:left}}
 .ok{{color:#0a7a2f}}.bad{{color:#b3261e}}tr.bad td{{color:#b3261e}}
 @media (prefers-color-scheme:dark){{body{{background:#121212;color:#ddd}}td,th{{border-color:#444}}}}
-</style></head><body><h1>JB Copier relay v{VERSION}</h1>{''.join(rows)}</body></html>"""
+</style></head><body><h1>MT5 Copier relay v{VERSION}</h1>{''.join(rows)}</body></html>"""
 
 
 def main():
-    ap = argparse.ArgumentParser(description="JB Copier relay server")
+    ap = argparse.ArgumentParser(description="MT5 Copier relay server")
     ap.add_argument("--host", default="0.0.0.0")
     ap.add_argument("--port", type=int, default=8787)
     ap.add_argument("--config", default=os.path.join(os.path.dirname(os.path.abspath(__file__)), "copy_server.json"))
@@ -357,7 +357,7 @@ def main():
         ctx.load_cert_chain(a.cert, a.key)
         httpd.socket = ctx.wrap_socket(httpd.socket, server_side=True)
         scheme = "https"
-    log.info("JB Copier relay v%s on %s://%s:%d  channels: %s", VERSION, scheme, a.host, a.port,
+    log.info("MT5 Copier relay v%s on %s://%s:%d  channels: %s", VERSION, scheme, a.host, a.port,
              ", ".join(Handler.channels))
     try:
         httpd.serve_forever()

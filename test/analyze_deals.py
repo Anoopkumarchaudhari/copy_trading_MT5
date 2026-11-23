@@ -1,6 +1,6 @@
-"""Pair master (driver) deals with slave copy deals from results/jbc_deals.csv and report copy latency.
+"""Pair master (driver) deals with slave copy deals from results/copier_deals.csv and report copy latency.
 
-    python analyze_deals.py [path/to/jbc_deals.csv]
+    python analyze_deals.py [path/to/copier_deals.csv]
 """
 import csv
 import os
@@ -11,7 +11,7 @@ ENTRY = {"0": "IN", "1": "OUT", "2": "INOUT", "3": "OUT_BY"}
 
 
 def main():
-    path = sys.argv[1] if len(sys.argv) > 1 else os.path.join(os.path.dirname(os.path.abspath(__file__)), "results", "jbc_deals.csv")
+    path = sys.argv[1] if len(sys.argv) > 1 else os.path.join(os.path.dirname(os.path.abspath(__file__)), "results", "copier_deals.csv")
     rows = list(csv.DictReader(open(path, encoding="ascii", errors="replace")))
     master = [r for r in rows if r["magic"] == DRIVER]
     slave = [r for r in rows if r["magic"] == SLAVE]

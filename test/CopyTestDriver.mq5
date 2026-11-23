@@ -1,10 +1,10 @@
 //+------------------------------------------------------------------+
-//|                                            JB_CopyTestDriver.mq5 |
-//|  Live-test driver for JB Copier (demo only). Plays a fixed        |
-//|  scenario with magic InpMagic so JB_CopyMaster (InpMagicInclude) |
-//|  publishes it, logs every step to Common\Files\jbc_driver.txt,   |
+//|                                               CopyTestDriver.mq5 |
+//|  Live-test driver for MT5 Copier (demo only). Plays a fixed      |
+//|  scenario with magic InpMagic so CopyMaster (InpMagicInclude)    |
+//|  publishes it, logs every step to Common\Files\copier_driver.txt,|
 //|  then exports all deals of the driver and the slave magics to    |
-//|  Common\Files\jbc_deals.csv and removes itself.                  |
+//|  Common\Files\copier_deals.csv and removes itself.               |
 //+------------------------------------------------------------------+
 #property version "1.00"
 #include <Trade\Trade.mqh>
@@ -27,7 +27,7 @@ void Mark(const string what)
    string line = StringFormat("%s|%.1f|%s", TimeToString(TimeLocal(), TIME_DATE | TIME_SECONDS),
                               (GetTickCount64() - g_t0) / 1000.0, what);
    Print("DRIVER ", line);
-   int h = FileOpen("jbc_driver.txt", FILE_READ | FILE_WRITE | FILE_TXT | FILE_COMMON | FILE_ANSI | FILE_SHARE_READ);
+   int h = FileOpen("copier_driver.txt", FILE_READ | FILE_WRITE | FILE_TXT | FILE_COMMON | FILE_ANSI | FILE_SHARE_READ);
    if(h != INVALID_HANDLE) { FileSeek(h, 0, SEEK_END); FileWriteString(h, line + "\r\n"); FileClose(h); }
   }
 
@@ -42,7 +42,7 @@ ulong Open(const string s, const ENUM_ORDER_TYPE t, const double lots, const dou
    double sl = sl_pips > 0 ? NormalizeDouble(px - d * sl_pips * Pip(s), dg) : 0;
    double tp = tp_pips > 0 ? NormalizeDouble(px + d * tp_pips * Pip(s), dg) : 0;
    tr.SetTypeFillingBySymbol(s);
-   if(!tr.PositionOpen(s, t, lots, px, sl, tp, "jbc-test"))
+   if(!tr.PositionOpen(s, t, lots, px, sl, tp, "copier-test"))
      { Mark(StringFormat("OPEN FAILED %s %u %s", s, tr.ResultRetcode(), tr.ResultRetcodeDescription())); return 0; }
    ulong pos = tr.ResultOrder();
    Mark(StringFormat("OPEN #%I64u %s %s %.2f @ %s SL %s TP %s", pos, t == ORDER_TYPE_BUY ? "BUY" : "SELL", s, lots,
@@ -78,7 +78,7 @@ void Close(const ulong pos)
 void Export(void)
   {
    HistorySelect(g_start - 120, TimeCurrent() + 3600);
-   int h = FileOpen("jbc_deals.csv", FILE_WRITE | FILE_TXT | FILE_COMMON | FILE_ANSI);
+   int h = FileOpen("copier_deals.csv", FILE_WRITE | FILE_TXT | FILE_COMMON | FILE_ANSI);
    if(h == INVALID_HANDLE) return;
    FileWriteString(h, "deal,time_msc,magic,symbol,type,entry,volume,price,position,comment,profit\r\n");
    for(int i = 0; i < HistoryDealsTotal(); i++)
@@ -113,7 +113,7 @@ int OnInit()
    tr.SetDeviationInPoints(30);
    g_t0 = GetTickCount64();
    g_start = TimeCurrent();
-   FileDelete("jbc_driver.txt", FILE_COMMON);
+   FileDelete("copier_driver.txt", FILE_COMMON);
    Mark("driver started");
    EventSetTimer(1);
    return INIT_SUCCEEDED;

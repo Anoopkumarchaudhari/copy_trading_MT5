@@ -1,113 +1,113 @@
-19:22:24.203	JB_CopySlave (EURUSD,M1)	2026.10.16 00:00:00   JBCS v1.00: channel 'main' <- http://127.0.0.1:8787 via TRANSPORT_WININET, lots LOT_MULTIPLIER x0.50, max age 60 s, max deviation 50 pts, magic 26101701
-19:22:24.630	JB_CopySlave (EURUSD,M1)	2026.10.16 00:10:00   JBCS: first master snapshot - 0 position(s) open on master 1
-19:22:28.659	JB_CopySlave (EURUSD,M1)	2026.10.16 00:35:00   JBCS: waiting on master #9000005: price 7180 points worse than master entry
-19:22:29.674	JB_CopySlave (EURUSD,M1)	2026.10.16 00:40:00   JBCS: waiting on master #9000005: price 7175 points worse than master entry
-19:22:30.684	JB_CopySlave (EURUSD,M1)	2026.10.16 00:50:00   JBCS: waiting on master #9000005: price 7182 points worse than master entry
-19:22:31.686	JB_CopySlave (EURUSD,M1)	2026.10.16 00:55:00   JBCS: waiting on master #9000005: price 7188 points worse than master entry
-19:22:32.688	JB_CopySlave (EURUSD,M1)	2026.10.16 01:00:00   JBCS: waiting on master #9000005: price 7189 points worse than master entry
+19:22:24.203	CopySlave (EURUSD,M1)	2026.10.16 00:00:00   CopySlave v1.00: channel 'main' <- http://127.0.0.1:8787 via TRANSPORT_WININET, lots LOT_MULTIPLIER x0.50, max age 60 s, max deviation 50 pts, magic 26101701
+19:22:24.630	CopySlave (EURUSD,M1)	2026.10.16 00:10:00   CopySlave: first master snapshot - 0 position(s) open on master 1
+19:22:28.659	CopySlave (EURUSD,M1)	2026.10.16 00:35:00   CopySlave: waiting on master #9000005: price 7180 points worse than master entry
+19:22:29.674	CopySlave (EURUSD,M1)	2026.10.16 00:40:00   CopySlave: waiting on master #9000005: price 7175 points worse than master entry
+19:22:30.684	CopySlave (EURUSD,M1)	2026.10.16 00:50:00   CopySlave: waiting on master #9000005: price 7182 points worse than master entry
+19:22:31.686	CopySlave (EURUSD,M1)	2026.10.16 00:55:00   CopySlave: waiting on master #9000005: price 7188 points worse than master entry
+19:22:32.688	CopySlave (EURUSD,M1)	2026.10.16 01:00:00   CopySlave: waiting on master #9000005: price 7189 points worse than master entry
 19:22:32.704	Trades	2026.10.16 01:05:00   deal #2 buy 0.05 EURUSD at 1.12180 done (based on order #2)
-19:22:32.704	JB_CopySlave (EURUSD,M1)	2026.10.16 01:05:00   JBCS: OPEN BUY 0.05 EURUSD @ 1.12180 copy of master #9000001 (BUY 0.10 @ 1.13500, 0 s old)
-19:22:34.725	JB_CopySlave (EURUSD,M1)	2026.10.16 01:20:00   JBCS: waiting on master #9000005: price 7141 points worse than master entry
-19:22:35.747	JB_CopySlave (EURUSD,M1)	2026.10.16 01:30:00   JBCS: waiting on master #9000005: price 7124 points worse than master entry
-19:22:36.773	JB_CopySlave (EURUSD,M1)	2026.10.16 01:40:00   JBCS: waiting on master #9000005: price 7135 points worse than master entry
-19:22:37.804	JB_CopySlave (EURUSD,M1)	2026.10.16 01:50:00   JBCS: waiting on master #9000005: price 7137 points worse than master entry
-19:22:39.821	JB_CopySlave (EURUSD,M1)	2026.10.16 02:10:00   JBCS: waiting on master #9000005: price 7140 points worse than master entry
-19:22:40.823	JB_CopySlave (EURUSD,M1)	2026.10.16 02:15:00   JBCS: waiting on master #9000005: price 7137 points worse than master entry
+19:22:32.704	CopySlave (EURUSD,M1)	2026.10.16 01:05:00   CopySlave: OPEN BUY 0.05 EURUSD @ 1.12180 copy of master #9000001 (BUY 0.10 @ 1.13500, 0 s old)
+19:22:34.725	CopySlave (EURUSD,M1)	2026.10.16 01:20:00   CopySlave: waiting on master #9000005: price 7141 points worse than master entry
+19:22:35.747	CopySlave (EURUSD,M1)	2026.10.16 01:30:00   CopySlave: waiting on master #9000005: price 7124 points worse than master entry
+19:22:36.773	CopySlave (EURUSD,M1)	2026.10.16 01:40:00   CopySlave: waiting on master #9000005: price 7135 points worse than master entry
+19:22:37.804	CopySlave (EURUSD,M1)	2026.10.16 01:50:00   CopySlave: waiting on master #9000005: price 7137 points worse than master entry
+19:22:39.821	CopySlave (EURUSD,M1)	2026.10.16 02:10:00   CopySlave: waiting on master #9000005: price 7140 points worse than master entry
+19:22:40.823	CopySlave (EURUSD,M1)	2026.10.16 02:15:00   CopySlave: waiting on master #9000005: price 7137 points worse than master entry
 19:22:40.823	Trades	2026.10.16 02:20:00   deal #3 sell 0.1 EURUSD at 1.12134 done (based on order #3)
-19:22:40.823	JB_CopySlave (EURUSD,M1)	2026.10.16 02:20:00   JBCS: OPEN SELL 0.10 EURUSD @ 1.12134 copy of master #9000002 (SELL 0.20 @ 1.11000, 0 s old)
-19:22:41.838	JB_CopySlave (EURUSD,M1)	2026.10.16 02:25:00   JBCS: waiting on master #9000005: price 7134 points worse than master entry
-19:22:42.841	JB_CopySlave (EURUSD,M1)	2026.10.16 02:35:00   JBCS: waiting on master #9000005: price 7128 points worse than master entry
-19:22:43.843	JB_CopySlave (EURUSD,M1)	2026.10.16 02:40:00   JBCS: waiting on master #9000005: price 7137 points worse than master entry
-19:22:44.846	JB_CopySlave (EURUSD,M1)	2026.10.16 02:45:00   JBCS: waiting on master #9000005: price 7138 points worse than master entry
-19:22:45.850	JB_CopySlave (EURUSD,M1)	2026.10.16 02:50:00   JBCS: waiting on master #9000005: price 7143 points worse than master entry
-19:22:46.852	JB_CopySlave (EURUSD,M1)	2026.10.16 02:55:00   JBCS: waiting on master #9000005: price 7135 points worse than master entry
-19:22:47.884	JB_CopySlave (EURUSD,M1)	2026.10.16 03:05:00   JBCS: waiting on master #9000005: price 7110 points worse than master entry
-19:22:48.898	JB_CopySlave (EURUSD,M1)	2026.10.16 03:15:00   JBCS: waiting on master #9000005: price 7095 points worse than master entry
-19:22:48.899	JB_CopySlave (EURUSD,M1)	2026.10.16 03:20:00   JBCS: MODIFY #2 EURUSD SL 0.60000 TP 1.90000 (master #9000001)
-19:22:49.903	JB_CopySlave (EURUSD,M1)	2026.10.16 03:25:00   JBCS: waiting on master #9000005: price 7104 points worse than master entry
-19:22:50.918	JB_CopySlave (EURUSD,M1)	2026.10.16 03:30:00   JBCS: waiting on master #9000005: price 7117 points worse than master entry
-19:22:51.927	JB_CopySlave (EURUSD,M1)	2026.10.16 03:40:00   JBCS: waiting on master #9000005: price 7116 points worse than master entry
-19:22:52.955	JB_CopySlave (EURUSD,M1)	2026.10.16 03:50:00   JBCS: waiting on master #9000005: price 7109 points worse than master entry
-19:22:53.981	JB_CopySlave (EURUSD,M1)	2026.10.16 04:00:00   JBCS: waiting on master #9000005: price 7128 points worse than master entry
-19:22:55.010	JB_CopySlave (EURUSD,M1)	2026.10.16 04:10:00   JBCS: waiting on master #9000005: price 7138 points worse than master entry
-19:22:56.026	JB_CopySlave (EURUSD,M1)	2026.10.16 04:20:00   JBCS: waiting on master #9000005: price 7145 points worse than master entry
+19:22:40.823	CopySlave (EURUSD,M1)	2026.10.16 02:20:00   CopySlave: OPEN SELL 0.10 EURUSD @ 1.12134 copy of master #9000002 (SELL 0.20 @ 1.11000, 0 s old)
+19:22:41.838	CopySlave (EURUSD,M1)	2026.10.16 02:25:00   CopySlave: waiting on master #9000005: price 7134 points worse than master entry
+19:22:42.841	CopySlave (EURUSD,M1)	2026.10.16 02:35:00   CopySlave: waiting on master #9000005: price 7128 points worse than master entry
+19:22:43.843	CopySlave (EURUSD,M1)	2026.10.16 02:40:00   CopySlave: waiting on master #9000005: price 7137 points worse than master entry
+19:22:44.846	CopySlave (EURUSD,M1)	2026.10.16 02:45:00   CopySlave: waiting on master #9000005: price 7138 points worse than master entry
+19:22:45.850	CopySlave (EURUSD,M1)	2026.10.16 02:50:00   CopySlave: waiting on master #9000005: price 7143 points worse than master entry
+19:22:46.852	CopySlave (EURUSD,M1)	2026.10.16 02:55:00   CopySlave: waiting on master #9000005: price 7135 points worse than master entry
+19:22:47.884	CopySlave (EURUSD,M1)	2026.10.16 03:05:00   CopySlave: waiting on master #9000005: price 7110 points worse than master entry
+19:22:48.898	CopySlave (EURUSD,M1)	2026.10.16 03:15:00   CopySlave: waiting on master #9000005: price 7095 points worse than master entry
+19:22:48.899	CopySlave (EURUSD,M1)	2026.10.16 03:20:00   CopySlave: MODIFY #2 EURUSD SL 0.60000 TP 1.90000 (master #9000001)
+19:22:49.903	CopySlave (EURUSD,M1)	2026.10.16 03:25:00   CopySlave: waiting on master #9000005: price 7104 points worse than master entry
+19:22:50.918	CopySlave (EURUSD,M1)	2026.10.16 03:30:00   CopySlave: waiting on master #9000005: price 7117 points worse than master entry
+19:22:51.927	CopySlave (EURUSD,M1)	2026.10.16 03:40:00   CopySlave: waiting on master #9000005: price 7116 points worse than master entry
+19:22:52.955	CopySlave (EURUSD,M1)	2026.10.16 03:50:00   CopySlave: waiting on master #9000005: price 7109 points worse than master entry
+19:22:53.981	CopySlave (EURUSD,M1)	2026.10.16 04:00:00   CopySlave: waiting on master #9000005: price 7128 points worse than master entry
+19:22:55.010	CopySlave (EURUSD,M1)	2026.10.16 04:10:00   CopySlave: waiting on master #9000005: price 7138 points worse than master entry
+19:22:56.026	CopySlave (EURUSD,M1)	2026.10.16 04:20:00   CopySlave: waiting on master #9000005: price 7145 points worse than master entry
 19:22:57.030	Trades	2026.10.16 04:30:00   deal #4 sell 0.02 EURUSD at 1.12120 done (based on order #4)
-19:22:57.030	JB_CopySlave (EURUSD,M1)	2026.10.16 04:30:00   JBCS: REDUCE BUY EURUSD by 0.02 #2 (master #9000001 now 0.06 lots)
-19:22:57.030	JB_CopySlave (EURUSD,M1)	2026.10.16 04:30:00   JBCS: waiting on master #9000005: price 7124 points worse than master entry
-19:22:58.035	JB_CopySlave (EURUSD,M1)	2026.10.16 04:35:00   JBCS: waiting on master #9000005: price 7114 points worse than master entry
-19:22:59.064	JB_CopySlave (EURUSD,M1)	2026.10.16 04:45:00   JBCS: waiting on master #9000005: price 7094 points worse than master entry
-19:23:00.093	JB_CopySlave (EURUSD,M1)	2026.10.16 04:55:00   JBCS: waiting on master #9000005: price 7121 points worse than master entry
-19:23:01.096	JB_CopySlave (EURUSD,M1)	2026.10.16 05:00:00   JBCS: waiting on master #9000005: price 7136 points worse than master entry
-19:23:02.097	JB_CopySlave (EURUSD,M1)	2026.10.16 05:05:00   JBCS: waiting on master #9000005: price 7165 points worse than master entry
-19:23:03.125	JB_CopySlave (EURUSD,M1)	2026.10.16 05:15:00   JBCS: waiting on master #9000005: price 7156 points worse than master entry
-19:23:04.138	JB_CopySlave (EURUSD,M1)	2026.10.16 05:25:00   JBCS: waiting on master #9000005: price 7168 points worse than master entry
-19:23:05.152	JB_CopySlave (EURUSD,M1)	2026.10.16 05:35:00   JBCS: waiting on master #9000005: price 7184 points worse than master entry
-19:23:05.153	JB_CopySlave (EURUSD,M1)	2026.10.16 05:40:00   JBCS: MODIFY #3 EURUSD SL 2.00000 TP 0.00000 (master #9000002)
-19:23:06.164	JB_CopySlave (EURUSD,M1)	2026.10.16 05:45:00   JBCS: waiting on master #9000005: price 7162 points worse than master entry
-19:23:07.190	JB_CopySlave (EURUSD,M1)	2026.10.16 05:55:00   JBCS: waiting on master #9000005: price 7181 points worse than master entry
-19:23:08.215	JB_CopySlave (EURUSD,M1)	2026.10.16 06:05:00   JBCS: waiting on master #9000005: price 7178 points worse than master entry
-19:23:09.243	JB_CopySlave (EURUSD,M1)	2026.10.16 06:15:00   JBCS: waiting on master #9000005: price 7182 points worse than master entry
-19:23:10.254	JB_CopySlave (EURUSD,M1)	2026.10.16 06:25:00   JBCS: waiting on master #9000005: price 7187 points worse than master entry
-19:23:11.280	JB_CopySlave (EURUSD,M1)	2026.10.16 06:35:00   JBCS: waiting on master #9000005: price 7177 points worse than master entry
-19:23:12.314	JB_CopySlave (EURUSD,M1)	2026.10.16 06:45:00   JBCS: waiting on master #9000005: price 7139 points worse than master entry
+19:22:57.030	CopySlave (EURUSD,M1)	2026.10.16 04:30:00   CopySlave: REDUCE BUY EURUSD by 0.02 #2 (master #9000001 now 0.06 lots)
+19:22:57.030	CopySlave (EURUSD,M1)	2026.10.16 04:30:00   CopySlave: waiting on master #9000005: price 7124 points worse than master entry
+19:22:58.035	CopySlave (EURUSD,M1)	2026.10.16 04:35:00   CopySlave: waiting on master #9000005: price 7114 points worse than master entry
+19:22:59.064	CopySlave (EURUSD,M1)	2026.10.16 04:45:00   CopySlave: waiting on master #9000005: price 7094 points worse than master entry
+19:23:00.093	CopySlave (EURUSD,M1)	2026.10.16 04:55:00   CopySlave: waiting on master #9000005: price 7121 points worse than master entry
+19:23:01.096	CopySlave (EURUSD,M1)	2026.10.16 05:00:00   CopySlave: waiting on master #9000005: price 7136 points worse than master entry
+19:23:02.097	CopySlave (EURUSD,M1)	2026.10.16 05:05:00   CopySlave: waiting on master #9000005: price 7165 points worse than master entry
+19:23:03.125	CopySlave (EURUSD,M1)	2026.10.16 05:15:00   CopySlave: waiting on master #9000005: price 7156 points worse than master entry
+19:23:04.138	CopySlave (EURUSD,M1)	2026.10.16 05:25:00   CopySlave: waiting on master #9000005: price 7168 points worse than master entry
+19:23:05.152	CopySlave (EURUSD,M1)	2026.10.16 05:35:00   CopySlave: waiting on master #9000005: price 7184 points worse than master entry
+19:23:05.153	CopySlave (EURUSD,M1)	2026.10.16 05:40:00   CopySlave: MODIFY #3 EURUSD SL 2.00000 TP 0.00000 (master #9000002)
+19:23:06.164	CopySlave (EURUSD,M1)	2026.10.16 05:45:00   CopySlave: waiting on master #9000005: price 7162 points worse than master entry
+19:23:07.190	CopySlave (EURUSD,M1)	2026.10.16 05:55:00   CopySlave: waiting on master #9000005: price 7181 points worse than master entry
+19:23:08.215	CopySlave (EURUSD,M1)	2026.10.16 06:05:00   CopySlave: waiting on master #9000005: price 7178 points worse than master entry
+19:23:09.243	CopySlave (EURUSD,M1)	2026.10.16 06:15:00   CopySlave: waiting on master #9000005: price 7182 points worse than master entry
+19:23:10.254	CopySlave (EURUSD,M1)	2026.10.16 06:25:00   CopySlave: waiting on master #9000005: price 7187 points worse than master entry
+19:23:11.280	CopySlave (EURUSD,M1)	2026.10.16 06:35:00   CopySlave: waiting on master #9000005: price 7177 points worse than master entry
+19:23:12.314	CopySlave (EURUSD,M1)	2026.10.16 06:45:00   CopySlave: waiting on master #9000005: price 7139 points worse than master entry
 19:23:13.316	Trades	2026.10.16 06:55:00   deal #5 sell 0.03 EURUSD at 1.12384 done (based on order #5)
-19:23:13.316	JB_CopySlave (EURUSD,M1)	2026.10.16 06:55:00   JBCS: CLOSE BUY 0.03 EURUSD #2 (master #9000001: master closed)
-19:23:13.316	JB_CopySlave (EURUSD,M1)	2026.10.16 06:55:00   JBCS: waiting on master #9000005: price 7388 points worse than master entry
-19:23:14.328	JB_CopySlave (EURUSD,M1)	2026.10.16 07:00:00   JBCS: waiting on master #9000005: price 7376 points worse than master entry
-19:23:15.343	JB_CopySlave (EURUSD,M1)	2026.10.16 07:10:00   JBCS: waiting on master #9000005: price 7264 points worse than master entry
-19:23:16.360	JB_CopySlave (EURUSD,M1)	2026.10.16 07:20:00   JBCS: waiting on master #9000005: price 7337 points worse than master entry
-19:23:17.374	JB_CopySlave (EURUSD,M1)	2026.10.16 07:30:00   JBCS: waiting on master #9000005: price 7315 points worse than master entry
-19:23:18.386	JB_CopySlave (EURUSD,M1)	2026.10.16 07:40:00   JBCS: waiting on master #9000005: price 7314 points worse than master entry
-19:23:19.417	JB_CopySlave (EURUSD,M1)	2026.10.16 07:50:00   JBCS: waiting on master #9000005: price 7281 points worse than master entry
-19:23:20.424	JB_CopySlave (EURUSD,M1)	2026.10.16 08:00:00   JBCS: waiting on master #9000005: price 7295 points worse than master entry
-19:23:21.450	JB_CopySlave (EURUSD,M1)	2026.10.16 08:10:00   JBCS: waiting on master #9000005: price 7261 points worse than master entry
-19:23:21.466	JB_CopySlave (EURUSD,M1)	2026.10.16 08:15:00   JBCS: not copying master #9000003 BUY 0.10 EURUSD: opened 300 s ago (> InpMaxSignalAgeSec)
-19:23:22.477	JB_CopySlave (EURUSD,M1)	2026.10.16 08:20:00   JBCS: waiting on master #9000005: price 7250 points worse than master entry
-19:23:23.521	JB_CopySlave (EURUSD,M1)	2026.10.16 08:30:00   JBCS: waiting on master #9000005: price 7241 points worse than master entry
-19:23:24.539	JB_CopySlave (EURUSD,M1)	2026.10.16 08:40:00   JBCS: waiting on master #9000005: price 7283 points worse than master entry
-19:23:25.566	JB_CopySlave (EURUSD,M1)	2026.10.16 08:50:00   JBCS: waiting on master #9000005: price 7237 points worse than master entry
-19:23:26.594	JB_CopySlave (EURUSD,M1)	2026.10.16 09:00:00   JBCS: waiting on master #9000005: price 7248 points worse than master entry
-19:23:27.605	JB_CopySlave (EURUSD,M1)	2026.10.16 09:05:00   JBCS: waiting on master #9000005: price 7255 points worse than master entry
-19:23:28.629	JB_CopySlave (EURUSD,M1)	2026.10.16 09:15:00   JBCS: waiting on master #9000005: price 7252 points worse than master entry
-19:23:29.642	JB_CopySlave (EURUSD,M1)	2026.10.16 09:20:00   JBCS: not copying master #9000005 BUY 0.10 EURUSD: opened 61 s ago (> InpMaxSignalAgeSec)
+19:23:13.316	CopySlave (EURUSD,M1)	2026.10.16 06:55:00   CopySlave: CLOSE BUY 0.03 EURUSD #2 (master #9000001: master closed)
+19:23:13.316	CopySlave (EURUSD,M1)	2026.10.16 06:55:00   CopySlave: waiting on master #9000005: price 7388 points worse than master entry
+19:23:14.328	CopySlave (EURUSD,M1)	2026.10.16 07:00:00   CopySlave: waiting on master #9000005: price 7376 points worse than master entry
+19:23:15.343	CopySlave (EURUSD,M1)	2026.10.16 07:10:00   CopySlave: waiting on master #9000005: price 7264 points worse than master entry
+19:23:16.360	CopySlave (EURUSD,M1)	2026.10.16 07:20:00   CopySlave: waiting on master #9000005: price 7337 points worse than master entry
+19:23:17.374	CopySlave (EURUSD,M1)	2026.10.16 07:30:00   CopySlave: waiting on master #9000005: price 7315 points worse than master entry
+19:23:18.386	CopySlave (EURUSD,M1)	2026.10.16 07:40:00   CopySlave: waiting on master #9000005: price 7314 points worse than master entry
+19:23:19.417	CopySlave (EURUSD,M1)	2026.10.16 07:50:00   CopySlave: waiting on master #9000005: price 7281 points worse than master entry
+19:23:20.424	CopySlave (EURUSD,M1)	2026.10.16 08:00:00   CopySlave: waiting on master #9000005: price 7295 points worse than master entry
+19:23:21.450	CopySlave (EURUSD,M1)	2026.10.16 08:10:00   CopySlave: waiting on master #9000005: price 7261 points worse than master entry
+19:23:21.466	CopySlave (EURUSD,M1)	2026.10.16 08:15:00   CopySlave: not copying master #9000003 BUY 0.10 EURUSD: opened 300 s ago (> InpMaxSignalAgeSec)
+19:23:22.477	CopySlave (EURUSD,M1)	2026.10.16 08:20:00   CopySlave: waiting on master #9000005: price 7250 points worse than master entry
+19:23:23.521	CopySlave (EURUSD,M1)	2026.10.16 08:30:00   CopySlave: waiting on master #9000005: price 7241 points worse than master entry
+19:23:24.539	CopySlave (EURUSD,M1)	2026.10.16 08:40:00   CopySlave: waiting on master #9000005: price 7283 points worse than master entry
+19:23:25.566	CopySlave (EURUSD,M1)	2026.10.16 08:50:00   CopySlave: waiting on master #9000005: price 7237 points worse than master entry
+19:23:26.594	CopySlave (EURUSD,M1)	2026.10.16 09:00:00   CopySlave: waiting on master #9000005: price 7248 points worse than master entry
+19:23:27.605	CopySlave (EURUSD,M1)	2026.10.16 09:05:00   CopySlave: waiting on master #9000005: price 7255 points worse than master entry
+19:23:28.629	CopySlave (EURUSD,M1)	2026.10.16 09:15:00   CopySlave: waiting on master #9000005: price 7252 points worse than master entry
+19:23:29.642	CopySlave (EURUSD,M1)	2026.10.16 09:20:00   CopySlave: not copying master #9000005 BUY 0.10 EURUSD: opened 61 s ago (> InpMaxSignalAgeSec)
 19:23:48.634	Trades	2026.10.16 10:55:00   deal #6 sell 0.05 EURUSD at 1.12388 done (based on order #6)
-19:23:48.634	JB_CopySlave (EURUSD,M1)	2026.10.16 10:55:00   JBCS: OPEN SELL 0.05 EURUSD @ 1.12388 copy of master #9000004 (SELL 0.10 @ 1.11000, 0 s old)
+19:23:48.634	CopySlave (EURUSD,M1)	2026.10.16 10:55:00   CopySlave: OPEN SELL 0.05 EURUSD @ 1.12388 copy of master #9000004 (SELL 0.10 @ 1.11000, 0 s old)
 19:23:58.840	Trades	2026.10.16 12:35:00   deal #7 sell 0.1 EURUSD at 1.12522 done (based on order #7)
-19:23:58.840	JB_CopySlave (EURUSD,M1)	2026.10.16 12:35:00   JBCS: ADD SELL 0.10 EURUSD (master #9000004 grew to 0.30 lots)
+19:23:58.840	CopySlave (EURUSD,M1)	2026.10.16 12:35:00   CopySlave: ADD SELL 0.10 EURUSD (master #9000004 grew to 0.30 lots)
 19:24:09.015	Trades	2026.10.16 14:15:00   deal #8 buy 0.09 EURUSD at 1.12577 done (based on order #8)
-19:24:09.015	JB_CopySlave (EURUSD,M1)	2026.10.16 14:15:00   JBCS: REDUCE SELL EURUSD by 0.09 #7 (master #9000004 now 0.12 lots)
+19:24:09.015	CopySlave (EURUSD,M1)	2026.10.16 14:15:00   CopySlave: REDUCE SELL EURUSD by 0.09 #7 (master #9000004 now 0.12 lots)
 19:24:19.139	Trades	2026.10.16 15:45:00   deal #9 buy 0.1 EURUSD at 1.12451 done (based on order #9)
-19:24:19.139	JB_CopySlave (EURUSD,M1)	2026.10.16 15:45:00   JBCS: CLOSE SELL 0.10 EURUSD #3 (master #9000002: master closed)
+19:24:19.139	CopySlave (EURUSD,M1)	2026.10.16 15:45:00   CopySlave: CLOSE SELL 0.10 EURUSD #3 (master #9000002: master closed)
 19:24:19.139	Trades	2026.10.16 15:45:00   deal #10 buy 0.05 EURUSD at 1.12451 done (based on order #10)
-19:24:19.139	JB_CopySlave (EURUSD,M1)	2026.10.16 15:45:00   JBCS: CLOSE SELL 0.05 EURUSD #6 (master #9000004: master closed)
+19:24:19.139	CopySlave (EURUSD,M1)	2026.10.16 15:45:00   CopySlave: CLOSE SELL 0.05 EURUSD #6 (master #9000004: master closed)
 19:24:19.139	Trades	2026.10.16 15:45:00   deal #11 buy 0.01 EURUSD at 1.12451 done (based on order #11)
-19:24:19.139	JB_CopySlave (EURUSD,M1)	2026.10.16 15:45:00   JBCS: CLOSE SELL 0.01 EURUSD #7 (master #9000004: master closed)
-19:26:34.881	JB_CopySlave (EURUSD,M1)	2026.10.16 00:00:00   JBCS v1.00: channel 'main' <- http://127.0.0.1:8787 via TRANSPORT_WININET, lots LOT_MULTIPLIER x0.50, max age 60 s, max deviation 0 pts, magic 26101701, REVERSE
-19:26:35.280	JB_CopySlave (EURUSD,M1)	2026.10.16 00:10:00   JBCS: first master snapshot - 0 position(s) open on master 1
+19:24:19.139	CopySlave (EURUSD,M1)	2026.10.16 15:45:00   CopySlave: CLOSE SELL 0.01 EURUSD #7 (master #9000004: master closed)
+19:26:34.881	CopySlave (EURUSD,M1)	2026.10.16 00:00:00   CopySlave v1.00: channel 'main' <- http://127.0.0.1:8787 via TRANSPORT_WININET, lots LOT_MULTIPLIER x0.50, max age 60 s, max deviation 0 pts, magic 26101701, REVERSE
+19:26:35.280	CopySlave (EURUSD,M1)	2026.10.16 00:10:00   CopySlave: first master snapshot - 0 position(s) open on master 1
 19:26:39.342	Trades	2026.10.16 00:45:00   deal #2 sell 0.05 EURUSD at 1.12180 done (based on order #2)
-19:26:39.343	JB_CopySlave (EURUSD,M1)	2026.10.16 00:45:00   JBCS: OPEN SELL 0.05 EURUSD @ 1.12180 copy of master #9000005 (BUY 0.10 @ 1.05000, 0 s old)
+19:26:39.343	CopySlave (EURUSD,M1)	2026.10.16 00:45:00   CopySlave: OPEN SELL 0.05 EURUSD @ 1.12180 copy of master #9000005 (BUY 0.10 @ 1.05000, 0 s old)
 19:26:43.369	Trades	2026.10.16 01:10:00   deal #3 sell 0.05 EURUSD at 1.12185 done (based on order #3)
-19:26:43.369	JB_CopySlave (EURUSD,M1)	2026.10.16 01:10:00   JBCS: OPEN SELL 0.05 EURUSD @ 1.12185 copy of master #9000001 (BUY 0.10 @ 1.13500, 0 s old)
+19:26:43.369	CopySlave (EURUSD,M1)	2026.10.16 01:10:00   CopySlave: OPEN SELL 0.05 EURUSD @ 1.12185 copy of master #9000001 (BUY 0.10 @ 1.13500, 0 s old)
 19:26:51.499	Trades	2026.10.16 02:15:00   deal #4 buy 0.1 EURUSD at 1.12137 done (based on order #4)
-19:26:51.499	JB_CopySlave (EURUSD,M1)	2026.10.16 02:15:00   JBCS: OPEN BUY 0.10 EURUSD @ 1.12137 copy of master #9000002 (SELL 0.20 @ 1.11000, 0 s old)
-19:26:59.611	JB_CopySlave (EURUSD,M1)	2026.10.16 03:15:00   JBCS: MODIFY #3 EURUSD SL 1.88685 TP 0.58685 (master #9000001)
+19:26:51.499	CopySlave (EURUSD,M1)	2026.10.16 02:15:00   CopySlave: OPEN BUY 0.10 EURUSD @ 1.12137 copy of master #9000002 (SELL 0.20 @ 1.11000, 0 s old)
+19:26:59.611	CopySlave (EURUSD,M1)	2026.10.16 03:15:00   CopySlave: MODIFY #3 EURUSD SL 1.88685 TP 0.58685 (master #9000001)
 19:27:07.731	Trades	2026.10.16 04:20:00   deal #5 buy 0.02 EURUSD at 1.12145 done (based on order #5)
-19:27:07.731	JB_CopySlave (EURUSD,M1)	2026.10.16 04:20:00   JBCS: REDUCE SELL EURUSD by 0.02 #3 (master #9000001 now 0.06 lots)
-19:27:15.872	JB_CopySlave (EURUSD,M1)	2026.10.16 05:30:00   JBCS: MODIFY #4 EURUSD SL 0.00000 TP 2.01137 (master #9000002)
+19:27:07.731	CopySlave (EURUSD,M1)	2026.10.16 04:20:00   CopySlave: REDUCE SELL EURUSD by 0.02 #3 (master #9000001 now 0.06 lots)
+19:27:15.872	CopySlave (EURUSD,M1)	2026.10.16 05:30:00   CopySlave: MODIFY #4 EURUSD SL 0.00000 TP 2.01137 (master #9000002)
 19:27:24.012	Trades	2026.10.16 06:50:00   deal #6 buy 0.03 EURUSD at 1.12346 done (based on order #6)
-19:27:24.012	JB_CopySlave (EURUSD,M1)	2026.10.16 06:50:00   JBCS: CLOSE SELL 0.03 EURUSD #3 (master #9000001: master closed)
-19:27:32.142	JB_CopySlave (EURUSD,M1)	2026.10.16 08:10:00   JBCS: not copying master #9000003 BUY 0.10 EURUSD: opened 300 s ago (> InpMaxSignalAgeSec)
+19:27:24.012	CopySlave (EURUSD,M1)	2026.10.16 06:50:00   CopySlave: CLOSE SELL 0.03 EURUSD #3 (master #9000001: master closed)
+19:27:32.142	CopySlave (EURUSD,M1)	2026.10.16 08:10:00   CopySlave: not copying master #9000003 BUY 0.10 EURUSD: opened 300 s ago (> InpMaxSignalAgeSec)
 19:27:59.283	Trades	2026.10.16 10:55:00   deal #7 buy 0.05 EURUSD at 1.12392 done (based on order #7)
-19:27:59.283	JB_CopySlave (EURUSD,M1)	2026.10.16 10:55:00   JBCS: OPEN BUY 0.05 EURUSD @ 1.12392 copy of master #9000004 (SELL 0.10 @ 1.11000, 0 s old)
+19:27:59.283	CopySlave (EURUSD,M1)	2026.10.16 10:55:00   CopySlave: OPEN BUY 0.05 EURUSD @ 1.12392 copy of master #9000004 (SELL 0.10 @ 1.11000, 0 s old)
 19:28:09.471	Trades	2026.10.16 12:35:00   deal #8 buy 0.1 EURUSD at 1.12526 done (based on order #8)
-19:28:09.471	JB_CopySlave (EURUSD,M1)	2026.10.16 12:35:00   JBCS: ADD BUY 0.10 EURUSD (master #9000004 grew to 0.30 lots)
+19:28:09.471	CopySlave (EURUSD,M1)	2026.10.16 12:35:00   CopySlave: ADD BUY 0.10 EURUSD (master #9000004 grew to 0.30 lots)
 19:28:19.671	Trades	2026.10.16 14:05:00   deal #9 sell 0.09 EURUSD at 1.12598 done (based on order #9)
-19:28:19.671	JB_CopySlave (EURUSD,M1)	2026.10.16 14:05:00   JBCS: REDUCE BUY EURUSD by 0.09 #8 (master #9000004 now 0.12 lots)
+19:28:19.671	CopySlave (EURUSD,M1)	2026.10.16 14:05:00   CopySlave: REDUCE BUY EURUSD by 0.09 #8 (master #9000004 now 0.12 lots)
 19:28:29.843	Trades	2026.10.16 15:35:00   deal #10 buy 0.05 EURUSD at 1.12527 done (based on order #10)
-19:28:29.843	JB_CopySlave (EURUSD,M1)	2026.10.16 15:35:00   JBCS: CLOSE SELL 0.05 EURUSD #2 (master #9000005: master closed)
+19:28:29.843	CopySlave (EURUSD,M1)	2026.10.16 15:35:00   CopySlave: CLOSE SELL 0.05 EURUSD #2 (master #9000005: master closed)
 19:28:29.843	Trades	2026.10.16 15:35:00   deal #11 sell 0.1 EURUSD at 1.12523 done (based on order #11)
-19:28:29.843	JB_CopySlave (EURUSD,M1)	2026.10.16 15:35:00   JBCS: CLOSE BUY 0.10 EURUSD #4 (master #9000002: master closed)
+19:28:29.843	CopySlave (EURUSD,M1)	2026.10.16 15:35:00   CopySlave: CLOSE BUY 0.10 EURUSD #4 (master #9000002: master closed)
 19:28:29.843	Trades	2026.10.16 15:35:00   deal #12 sell 0.05 EURUSD at 1.12523 done (based on order #12)
-19:28:29.843	JB_CopySlave (EURUSD,M1)	2026.10.16 15:35:00   JBCS: CLOSE BUY 0.05 EURUSD #7 (master #9000004: master closed)
+19:28:29.843	CopySlave (EURUSD,M1)	2026.10.16 15:35:00   CopySlave: CLOSE BUY 0.05 EURUSD #7 (master #9000004: master closed)
 19:28:29.843	Trades	2026.10.16 15:35:00   deal #13 sell 0.01 EURUSD at 1.12523 done (based on order #13)
-19:28:29.843	JB_CopySlave (EURUSD,M1)	2026.10.16 15:35:00   JBCS: CLOSE BUY 0.01 EURUSD #8 (master #9000004: master closed)
+19:28:29.843	CopySlave (EURUSD,M1)	2026.10.16 15:35:00   CopySlave: CLOSE BUY 0.01 EURUSD #8 (master #9000004: master closed)

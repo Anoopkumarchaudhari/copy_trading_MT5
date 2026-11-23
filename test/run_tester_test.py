@@ -1,4 +1,4 @@
-"""Weekend test of JB_CopySlave: Strategy Tester + real relay + scripted master.
+"""Weekend test of CopySlave: Strategy Tester + real relay + scripted master.
 
     python run_tester_test.py [normal|reverse]
 
@@ -72,22 +72,22 @@ def main():
                            stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     time.sleep(1.5)
 
-    dst = os.path.join(CLONE, "MQL5", "Experts", "JB_Copier")
+    dst = os.path.join(CLONE, "MQL5", "Experts", "MT5_Copier")
     os.makedirs(dst, exist_ok=True)
-    shutil.copy2(os.path.join(ROOT, "mql5", "JB_CopySlave.ex5"), dst)
+    shutil.copy2(os.path.join(ROOT, "mql5", "CopySlave.ex5"), dst)
     prof = os.path.join(CLONE, "MQL5", "Profiles", "Tester")
     os.makedirs(prof, exist_ok=True)
-    write_ascii(os.path.join(prof, "jbc_slave_tester.set"), [
+    write_ascii(os.path.join(prof, "copier_slave_tester.set"), [
         f"InpServerUrl=http://127.0.0.1:{PORT}", "InpChannel=main",
         f"InpSlaveKey={cfg['channels']['main']['slave_keys'][0]}", "InpSlaveId=tester", "InpTransport=1",
         "InpLotMode=1", "InpLotValue=0.5", "InpMagic=26101701", "InpWaitMs=1000", "InpPollMs=300000"] + PASSES[name])
-    ini = os.path.join(CLONE, "jbc_tester.ini")
+    ini = os.path.join(CLONE, "copier_tester.ini")
     write_ascii(ini, [
         "[Experts]", "AllowDllImport=1", "Enabled=1",
-        "[Tester]", "Expert=JB_Copier\\JB_CopySlave", "ExpertParameters=jbc_slave_tester.set",
+        "[Tester]", "Expert=MT5_Copier\\CopySlave", "ExpertParameters=copier_slave_tester.set",
         "Symbol=EURUSD", "Period=M1", "Model=1", "FromDate=2026.10.16", "ToDate=2026.10.17",
         "Deposit=100000", "Currency=USD", "Leverage=100", "Optimization=0", "Visual=0",
-        "Report=jbc_tester_report", "ReplaceReport=1", "ShutdownTerminal=1"])
+        "Report=copier_tester_report", "ReplaceReport=1", "ShutdownTerminal=1"])
 
     t_start = time.time()
     si = subprocess.STARTUPINFO()
@@ -122,7 +122,7 @@ def main():
     for p in logs:
         text = open(p, "rb").read().decode("utf-16", errors="replace")
         out += [l.split("\t", 2)[-1] for l in text.splitlines()
-                if any(k in l for k in ("JBCS", "deal #", "failed", "error"))]
+                if any(k in l for k in ("CopySlave", "deal #", "failed", "error"))]
     with open(os.path.join(RES, f"tester_{name}_slave.log"), "w", encoding="utf-8") as fh:
         fh.write("\n".join(out))
     with open(os.path.join(RES, f"tester_{name}_master_steps.log"), "w", encoding="utf-8") as fh:

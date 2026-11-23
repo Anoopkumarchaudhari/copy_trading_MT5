@@ -1,11 +1,11 @@
-"""JB Copier live demo test.
+"""MT5 Copier live demo test.
 
     python run_live_test.py
 
 Starts the relay server and three headless clone terminals on the demo account:
-    mt5clone_c  JB_CopySlave       (copies with magic 26101701, lots x0.5, WinINet transport)
-    mt5clone_b  JB_CopyMaster      (publishes only the driver's magic 26101799)
-    mt5clone    JB_CopyTestDriver  (plays the scenario, exports deals at the end)
+    mt5clone_c  CopySlave       (copies with magic 26101701, lots x0.5, WinINet transport)
+    mt5clone_b  CopyMaster      (publishes only the driver's magic 26101799)
+    mt5clone    CopyTestDriver  (plays the scenario, exports deals at the end)
 Phase 2 kills the master terminal for ~25 s (slave must freeze, then catch up);
 phase 3 hard-kills and restarts the slave (it must re-link, not duplicate).
 Everything lands in test/results/.
@@ -23,7 +23,7 @@ ROOT = os.path.dirname(HERE)
 RES = os.path.join(HERE, "results")
 COMMON = os.path.expandvars(r"%APPDATA%\MetaQuotes\Terminal\Common\Files")
 CLONES = {"slave": r"D:\Strategy\mt5clone_c", "master": r"D:\Strategy\mt5clone_b", "driver": r"D:\Strategy\mt5clone"}
-EXPERTS = {"slave": "JB_CopySlave", "master": "JB_CopyMaster", "driver": "JB_CopyTestDriver"}
+EXPERTS = {"slave": "CopySlave", "master": "CopyMaster", "driver": "CopyTestDriver"}
 PORT = 8787
 
 
@@ -47,16 +47,16 @@ def prepare(cfg):
         "driver": ["InpMagic=26101799", "InpSlaveMagic=26101701", "InpStartDelay=25"],
     }
     for role, clone in CLONES.items():
-        dst = os.path.join(clone, "MQL5", "Experts", "JB_Copier")
+        dst = os.path.join(clone, "MQL5", "Experts", "MT5_Copier")
         os.makedirs(dst, exist_ok=True)
-        for f in ("JB_CopyMaster.ex5", "JB_CopySlave.ex5"):
+        for f in ("CopyMaster.ex5", "CopySlave.ex5"):
             shutil.copy2(os.path.join(ROOT, "mql5", f), dst)
-        shutil.copy2(os.path.join(HERE, "JB_CopyTestDriver.ex5"), dst)
+        shutil.copy2(os.path.join(HERE, "CopyTestDriver.ex5"), dst)
         os.makedirs(os.path.join(clone, "MQL5", "Presets"), exist_ok=True)
-        write_ascii(os.path.join(clone, "MQL5", "Presets", f"jbc_{role}_test.set"), sets[role])
-        write_ascii(os.path.join(clone, f"jbc_{role}.ini"), [
+        write_ascii(os.path.join(clone, "MQL5", "Presets", f"copier_{role}_test.set"), sets[role])
+        write_ascii(os.path.join(clone, f"copier_{role}.ini"), [
             "[Experts]", "Enabled=1", "AllowLiveTrading=1", "AllowDllImport=1",
-            "[StartUp]", f"Expert=JB_Copier\\{EXPERTS[role]}", f"ExpertParameters=jbc_{role}_test.set",
+            "[StartUp]", f"Expert=MT5_Copier\\{EXPERTS[role]}", f"ExpertParameters=copier_{role}_test.set",
             "Symbol=EURUSD", "Period=M1"])
 
 
@@ -65,7 +65,7 @@ def start(role):
     si = subprocess.STARTUPINFO()
     si.dwFlags |= subprocess.STARTF_USESHOWWINDOW
     si.wShowWindow = 7  # SW_SHOWMINNOACTIVE - don't steal the desktop
-    p = subprocess.Popen([os.path.join(clone, "terminal64.exe"), "/portable", f"/config:{clone}\\jbc_{role}.ini"],
+    p = subprocess.Popen([os.path.join(clone, "terminal64.exe"), "/portable", f"/config:{clone}\\copier_{role}.ini"],
                          cwd=clone, startupinfo=si)
     log(f"started {role} terminal pid {p.pid}")
     return p
@@ -81,7 +81,7 @@ def kill(role, procs):
 
 def marks():
     try:
-        with open(os.path.join(COMMON, "jbc_driver.txt"), encoding="ascii", errors="replace") as fh:
+        with open(os.path.join(COMMON, "copier_driver.txt"), encoding="ascii", errors="replace") as fh:
             return [l.strip() for l in fh if l.strip()]
     except FileNotFoundError:
         return []
@@ -99,7 +99,7 @@ def wait_mark(word, timeout):
 
 def main():
     os.makedirs(RES, exist_ok=True)
-    for f in ("jbc_driver.txt", "jbc_deals.csv"):
+    for f in ("copier_driver.txt", "copier_deals.csv"):
         if os.path.exists(os.path.join(COMMON, f)):
             os.remove(os.path.join(COMMON, f))
     cfg_path = os.path.join(HERE, "copy_server_test.json")
@@ -160,7 +160,7 @@ def main():
                     keep.append("\t".join(f[2:]))
             with open(os.path.join(RES, f"{role}_experts.log"), "w", encoding="utf-8") as fh:
                 fh.write("\n".join(keep))
-    for f in ("jbc_driver.txt", "jbc_deals.csv"):
+    for f in ("copier_driver.txt", "copier_deals.csv"):
         if os.path.exists(os.path.join(COMMON, f)):
             shutil.copy2(os.path.join(COMMON, f), RES)
     log("results in " + RES)

@@ -1,4 +1,4 @@
-D:\Strategy\docs\jb_copier\test\run_tester_test.py:56: SyntaxWarning: "\*" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\*"? A raw string is also an option.
+D:\Strategy\docs\mt5_copier\test\run_tester_test.py:56: SyntaxWarning: "\*" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\*"? A raw string is also an option.
   f"Where-Object {{ $_.Path -like '{CLONE}\*' }}).Count")
 19:22:20.071 tester launched
 19:22:24.597 slave connected - running scenario

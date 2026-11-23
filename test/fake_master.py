@@ -1,6 +1,6 @@
-"""Scripted master book for testing JB_CopySlave without a live market.
+"""Scripted master book for testing CopySlave without a live market.
 
-Pushes snapshots to the relay exactly like JB_CopyMaster would (A| and P| lines),
+Pushes snapshots to the relay exactly like CopyMaster would (A| and P| lines),
 one heartbeat per second, and walks through a fixed scenario. Used by
 run_tester_test.py; prints every step with a timestamp.
 """

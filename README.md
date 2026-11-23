@@ -1,4 +1,4 @@
-# JB Copier: remote trade copier for MetaTrader 5
+# MT5 Copier: self-hosted remote trade copier for MetaTrader 5
 
 **Mirror one MT5 account's trades onto any number of other MT5 accounts, across PCs, VPSes and brokers, through a tiny self-hosted relay.**
 
@@ -12,11 +12,11 @@ One **master** MT5 account publishes its open positions to a small relay server.
 Any number of **slave** MT5 accounts pull that book and mirror it with their own lot sizing.
 The relay is a single Python file with no pip dependencies. The EAs are plain MQL5.
 
-![JB Copier relay dashboard showing the master book and two connected slaves](docs/dashboard.png)
+![MT5 Copier relay dashboard showing the master book and two connected slaves](docs/dashboard.png)
 
 *The relay's built-in dashboard: master book, every slave's balance, equity, copies and state.*
 
-## Why JB Copier
+## Why MT5 Copier
 
 - **Works across brokers and machines.** Master and slaves only need HTTP(S) access to the relay. Symbol mapping and suffix handling (`GOLD=XAUUSD`, strip `.fx`, add `.m`) are built in.
 - **Self-healing.** Slaves reconcile against whole snapshots instead of replaying events. A slave that restarts, drops its connection or misses an update fixes itself on the next answer.
@@ -32,7 +32,7 @@ The relay is a single Python file with no pip dependencies. The EAs are plain MQ
 ```
  MT5 master terminal                 relay server (VPS)                 MT5 slave terminals
 ┌───────────────────┐  POST push   ┌──────────────────────┐  GET pull  ┌───────────────────┐
-│ JB_CopyMaster EA  │ ───────────► │ copy_server.py       │ ◄───────── │ JB_CopySlave EA   │
+│ CopyMaster EA  │ ───────────► │ copy_server.py       │ ◄───────── │ CopySlave EA   │
 │ snapshot of all   │  on change + │ keeps latest book    │ long-poll  │ reconcile own     │
 │ open positions    │  every 2 s   │ per channel, keys,   │ (wakes on  │ positions vs book │
 └───────────────────┘              │ dashboard            │  change)   └───────────────────┘
@@ -44,10 +44,10 @@ The relay is a single Python file with no pip dependencies. The EAs are plain MQ
 | [`server/copy_server.py`](server/copy_server.py) | Relay server. Python 3.8+ standard library only. |
 | [`server/copy_server.example.json`](server/copy_server.example.json) | Shape of the config. The real `copy_server.json` is generated on first run and is git-ignored. |
 | [`server/VPS_SETUP.md`](server/VPS_SETUP.md) | Step-by-step VPS guide for Windows (Task Scheduler) and Linux (systemd). |
-| [`server/jb-copier.service`](server/jb-copier.service) | Hardened systemd unit for the relay. |
-| [`mql5/JB_CopyMaster.mq5`](mql5/JB_CopyMaster.mq5) | Master EA. Publishes positions and never trades. |
-| [`mql5/JB_CopySlave.mq5`](mql5/JB_CopySlave.mq5) | Slave EA. Opens, closes and modifies copies. Default magic `26101701`. |
-| [`mql5/JB_CopierNet.mqh`](mql5/JB_CopierNet.mqh) | HTTP transport shared by both EAs (WebRequest or WinINet). |
+| [`server/mt5-copier.service`](server/mt5-copier.service) | Hardened systemd unit for the relay. |
+| [`mql5/CopyMaster.mq5`](mql5/CopyMaster.mq5) | Master EA. Publishes positions and never trades. |
+| [`mql5/CopySlave.mq5`](mql5/CopySlave.mq5) | Slave EA. Opens, closes and modifies copies. Default magic `26101701`. |
+| [`mql5/CopierNet.mqh`](mql5/CopierNet.mqh) | HTTP transport shared by both EAs (WebRequest or WinINet). |
 | [`mql5/*.ex5`](mql5/) | Compiled EAs, so you can attach them without MetaEditor. |
 | [`test/`](test/) | Scripted master, Strategy Tester runner, live demo runner, deal analyzer, results. |
 
@@ -90,7 +90,7 @@ but no URL list, and it keeps the connection open between requests.
 
 ### 3. Attach the master EA
 
-Attach `JB_CopyMaster` to any one chart on the master account and set:
+Attach `CopyMaster` to any one chart on the master account and set:
 
 - `InpServerUrl` and `InpChannel`
 - `InpMasterKey`
@@ -103,7 +103,7 @@ the sequence number and the age of the last push.
 
 ### 4. Attach the slave EA
 
-Attach `JB_CopySlave` to any one chart on each follower account.
+Attach `CopySlave` to any one chart on each follower account.
 
 | Input | Meaning |
 |---|---|
@@ -146,7 +146,7 @@ misses an update fixes itself on the next answer. It never "replays" a missed cl
 - Removing the master EA sends nothing, so the slaves freeze instead of closing.
 - A copy that closes on the slave side (its own SL hit, or a manual close) is **not reopened**.
 - Copies carry magic `InpMagic` and the comment `CP#<master ticket>`. Their state lives in
-  terminal global variables `JBCS.<magic>.*`, flushed after every change, so a hard-killed
+  terminal global variables `CopySlave.<magic>.*`, flushed after every change, so a hard-killed
   terminal comes back and re-links its copies.
 - A master trade older than `InpMaxSignalAgeSec` is not copied, and neither is one whose
   price has already moved more than `InpMaxDeviationPts` against the slave.
@@ -174,7 +174,7 @@ Keys go in the `X-Key` header. One relay can host several channels, each with it
 
 ### Strategy Tester against the real relay: PASSED
 
-`test/run_tester_test.py normal|reverse` runs `JB_CopySlave` in the Strategy Tester of an MT5
+`test/run_tester_test.py normal|reverse` runs `CopySlave` in the Strategy Tester of an MT5
 installation (path at the top of the script) against the real relay. `test/fake_master.py`
 pushes a scripted master book, and the tester fills the slave's orders on EURUSD prices
 from 2026-10-16. Logs are in [`test/results/`](test/results/).
@@ -215,9 +215,9 @@ on a demo account:
 
 | Terminal | Runs | Settings |
 |---|---|---|
-| slave clone | `JB_CopySlave` | magic 26101701, lots ×0.5 |
-| master clone | `JB_CopyMaster` | publishes only magic 26101799 |
-| driver clone | `JB_CopyTestDriver` | trades EURUSD and GBPUSD, 0.10 lots |
+| slave clone | `CopySlave` | magic 26101701, lots ×0.5 |
+| master clone | `CopyMaster` | publishes only magic 26101799 |
+| driver clone | `CopyTestDriver` | trades EURUSD and GBPUSD, 0.10 lots |
 
 The scenario runs open, SL/TP modify, partial close and close, then two failure tests:
 - The master terminal is killed for 25 s while the driver opens a new trade.

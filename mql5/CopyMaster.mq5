@@ -1,22 +1,23 @@
 //+------------------------------------------------------------------+
-//|                                                JB_CopyMaster.mq5 |
-//|  JB Copier - MASTER side.                                        |
-//|  Publishes this account's open positions to the JB Copier relay  |
-//|  server (docs\jb_copier\server\copy_server.py). Opens no trades. |
+//|                                                   CopyMaster.mq5 |
+//|  MT5 Copier - MASTER side.                                       |
+//|  Publishes this account's open positions to the MT5 Copier relay |
+//|  server (server\copy_server.py). Opens no trades.                |
 //|                                                                  |
 //|  Snapshot sent to POST /v1/<channel>/push:                       |
-//|   A|login|server|currency|balance|equity|leverage|server_time|ver |
+//|   A|login|server|currency|balance|equity|leverage|server_time|ver|
 //|   P|ticket|symbol|type|volume|open|sl|tp|magic|time|contract|digits
 //|  Pushed at once when positions or balance change, otherwise every|
 //|  InpHeartbeatSec as a heartbeat. Nothing is pushed while the     |
 //|  terminal is disconnected or still synchronising, so slaves see  |
 //|  "master offline" (and freeze) instead of an empty book.         |
 //+------------------------------------------------------------------+
-#property copyright "JB"
+#property copyright "MT5 Copier contributors"
+#property link      "https://github.com/Anoopkumarchaudhari/copy_trading_MT5"
 #property version   "1.01"
-#property description "JB Copier master: publishes open positions to the JB Copier relay server."
+#property description "MT5 Copier master: publishes open positions to the MT5 Copier relay server."
 
-#include "JB_CopierNet.mqh"
+#include "CopierNet.mqh"
 
 #define MASTER_VERSION "1.01"
 
@@ -73,7 +74,7 @@ int SplitLongs(const string list, long &out[])
       StringTrimLeft(p);
       StringTrimRight(p);
       if(p == "") continue;
-      if(StringToInteger(p) == 0 && p != "0") { Print("JBCM: '", p, "' is not a magic number - ignored"); continue; }
+      if(StringToInteger(p) == 0 && p != "0") { Print("CopyMaster: '", p, "' is not a magic number - ignored"); continue; }
       int k = ArraySize(out);
       ArrayResize(out, k + 1);
       out[k] = StringToInteger(p);
@@ -116,7 +117,7 @@ void LogError(const string msg)
   {
    g_last_err = msg;
    ulong now = GetTickCount64();
-   if(now - g_last_err_log > 30000) { Print("JBCM: ", msg); g_last_err_log = now; }
+   if(now - g_last_err_log > 30000) { Print("CopyMaster: ", msg); g_last_err_log = now; }
   }
 
 string Num(const double v, const int digits)
@@ -209,11 +210,11 @@ void Scan(const bool force)
       g_last_book = digest;
       g_last_push_ms = now;
       g_pushes++;
-      if(g_fail > 0) Print("JBCM: server reachable again, seq ", g_seq);
+      if(g_fail > 0) Print("CopyMaster: server reachable again, seq ", g_seq);
       g_fail = 0;
       g_last_err = "";
       g_state = "LIVE";
-      if(changed) Print(StringFormat("JBCM: published %d position(s), seq %I64d", count, g_seq));
+      if(changed) Print(StringFormat("CopyMaster: published %d position(s), seq %I64d", count, g_seq));
      }
    else
      {
@@ -237,7 +238,7 @@ void ShowStatus(void)
    if(now - last < 500) return;
    last = now;
    string age = g_last_push_ms > 0 ? StringFormat("%.1fs ago", (now - g_last_push_ms) / 1000.0) : "never";
-   Comment(StringFormat("JB Copier MASTER v%s  |  %s\nchannel %s  @ %s\npositions published %d  |  seq %I64d  |  last push %s  |  pushes %I64u%s",
+   Comment(StringFormat("MT5 Copier MASTER v%s  |  %s\nchannel %s  @ %s\npositions published %d  |  seq %I64d  |  last push %s  |  pushes %I64u%s",
                         MASTER_VERSION, g_state, InpChannel, g_http.BaseUrl(), g_npos, g_seq, age, g_pushes,
                         g_last_err != "" ? "\nlast error: " + g_last_err : ""));
   }
@@ -247,20 +248,20 @@ int OnInit()
   {
    if(InpMasterKey == "")
      {
-      Alert("JB Copier master: set InpMasterKey (see copy_server.json)");
+      Alert("MT5 Copier master: set InpMasterKey (see copy_server.json)");
       return INIT_PARAMETERS_INCORRECT;
      }
    if(StringFind(InpChannel, "/") >= 0 || InpChannel == "")
       return INIT_PARAMETERS_INCORRECT;
    if(!g_http.Init(InpTransport, InpServerUrl, InpMasterKey))
      {
-      Alert("JB Copier master: ", g_http.error);
+      Alert("MT5 Copier master: ", g_http.error);
       return INIT_PARAMETERS_INCORRECT;
      }
    SplitLongs(InpMagicInclude, g_inc);
    SplitLongs(InpMagicExclude, g_exc);
    SplitStrings(InpSymbols, g_syms);
-   PrintFormat("JBCM v%s: channel '%s' -> %s via %s, scan %d ms, heartbeat %d s, magic include [%s] exclude [%s]",
+   PrintFormat("CopyMaster v%s: channel '%s' -> %s via %s, scan %d ms, heartbeat %d s, magic include [%s] exclude [%s]",
                MASTER_VERSION, InpChannel, g_http.BaseUrl(), EnumToString(InpTransport), InpScanMs,
                InpHeartbeatSec, InpMagicInclude, InpMagicExclude);
    EventSetMillisecondTimer(MathMax(50, InpScanMs));

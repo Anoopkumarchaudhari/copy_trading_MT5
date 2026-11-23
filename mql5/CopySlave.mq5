@@ -1,7 +1,7 @@
 //+------------------------------------------------------------------+
-//|                                                 JB_CopySlave.mq5 |
-//|  JB Copier - SLAVE side.                                         |
-//|  Long-polls the JB Copier relay for the master's position book   |
+//|                                                    CopySlave.mq5 |
+//|  MT5 Copier - SLAVE side.                                        |
+//|  Long-polls the MT5 Copier relay for the master's position book  |
 //|  and reconciles this account against it on every answer:         |
 //|    master position new      -> open a copy (age/deviation/lot    |
 //|                                checks, once per master ticket)   |
@@ -12,14 +12,15 @@
 //|  Master silent > InpStaleSec (EA removed, terminal or server     |
 //|  down): FREEZE - nothing is opened or closed until it is back.   |
 //|  Copies carry magic InpMagic and comment "CP#<master ticket>";   |
-//|  state lives in terminal global variables JBCS.<magic>.*         |
+//|  state lives in terminal global variables CopySlave.<magic>.*    |
 //+------------------------------------------------------------------+
-#property copyright "JB"
+#property copyright "MT5 Copier contributors"
+#property link      "https://github.com/Anoopkumarchaudhari/copy_trading_MT5"
 #property version   "1.01"
-#property description "JB Copier slave: mirrors the master's positions from the JB Copier relay server."
+#property description "MT5 Copier slave: mirrors the master's positions from the MT5 Copier relay server."
 
 #include <Trade\Trade.mqh>
-#include "JB_CopierNet.mqh"
+#include "CopierNet.mqh"
 
 #define SLAVE_VERSION "1.01"
 
@@ -185,7 +186,7 @@ void LogError(const string msg)
    ulong now = GetTickCount64();
    if(msg != g_last_err_logged || now - g_last_err_log_ms > 30000)
      {
-      Print("JBCS: ", msg);
+      Print("CopySlave: ", msg);
       g_last_err_logged = msg;
       g_last_err_log_ms = now;
      }
@@ -194,12 +195,12 @@ void LogError(const string msg)
 void Action(const string msg)
   {
    g_last_action = TimeToString(TimeLocal(), TIME_SECONDS) + " " + msg;
-   Print("JBCS: ", msg);
+   Print("CopySlave: ", msg);
   }
 
 string Clean(string s) { StringReplace(s, "|", "/"); StringReplace(s, "\n", " "); return s; }
 
-//--- global-variable state: JBCS.<magic>.<kind>.<id>
+//--- global-variable state: CopySlave.<magic>.<kind>.<id>
 //    H = master ticket handled (1 copied, 2 skipped), R = slave/master lot ratio,
 //    V = last seen master volume, P = slave position -> master ticket
 string GvName(const string kind, const ulong id) { return g_gv + kind + "." + IntegerToString((long)id); }
@@ -396,7 +397,7 @@ string ResolveSymbol(const string ms)
    ArrayResize(g_cache_to, n + 1);
    g_cache_from[n] = ms;
    g_cache_to[n] = r;
-   if(r != ms) PrintFormat("JBCS: master symbol %s -> %s", ms, r);
+   if(r != ms) PrintFormat("CopySlave: master symbol %s -> %s", ms, r);
    return r;
   }
 
@@ -515,7 +516,7 @@ void CloseCopy(const CPos &c, const string why)
 void MarkSkip(const MPos &m, const string why)
   {
    GvSet("H", m.ticket, 2);
-   PrintFormat("JBCS: not copying master #%I64u %s %s %s: %s", m.ticket, Side(m.type),
+   PrintFormat("CopySlave: not copying master #%I64u %s %s %s: %s", m.ticket, Side(m.type),
                DoubleToString(m.volume, 2), m.symbol, why);
   }
 
@@ -544,7 +545,7 @@ void TryOpen(const MPos &m)
       if(adverse > InpMaxDeviationPts)
         {
          g_last_err = StringFormat("waiting on master #%I64u: price %.0f points worse than master entry", m.ticket, adverse);
-         if(!Cooling("W", m.ticket)) { Print("JBCS: ", g_last_err); SetCool("W", m.ticket, 30000); }
+         if(!Cooling("W", m.ticket)) { Print("CopySlave: ", g_last_err); SetCool("W", m.ticket, 30000); }
          SetCool("O", m.ticket, 1000);
          return;
         }
@@ -696,7 +697,7 @@ void Reconcile(void)
    bool same = g_m_login == AccountInfoInteger(ACCOUNT_LOGIN) && g_m_server == AccountInfoString(ACCOUNT_SERVER);
    if(same && !g_warned_same)
      {
-      PrintFormat("JBCS: master and slave are the same account - master positions with magic %I64d are ignored; "
+      PrintFormat("CopySlave: master and slave are the same account - master positions with magic %I64d are ignored; "
                   "set InpMagicExclude=%I64d on the master", InpMagic, InpMagic);
       g_warned_same = true;
      }
@@ -705,7 +706,7 @@ void Reconcile(void)
       ArrayResize(g_baseline, ArraySize(g_m));
       for(int i = 0; i < ArraySize(g_m); i++) g_baseline[i] = g_m[i].ticket;
       g_baseline_done = true;
-      PrintFormat("JBCS: first master snapshot - %d position(s) open on master %I64d", ArraySize(g_m), g_m_login);
+      PrintFormat("CopySlave: first master snapshot - %d position(s) open on master %I64d", ArraySize(g_m), g_m_login);
      }
 
    CPos c[];
@@ -761,7 +762,7 @@ void UpdateLossGuard(void)
    bool was = g_loss_blocked;
    g_loss_blocked = pl <= -InpDailyLossLimit;
    if(g_loss_blocked != was)
-      PrintFormat("JBCS: daily loss limit %s (day P/L %.2f)", g_loss_blocked ? "HIT - no new copies today" : "cleared", pl);
+      PrintFormat("CopySlave: daily loss limit %s (day P/L %.2f)", g_loss_blocked ? "HIT - no new copies today" : "cleared", pl);
   }
 
 void CleanupGlobals(const CPos &c[])
@@ -800,7 +801,7 @@ void ShowStatus(void)
                                   (g_age_ms + (long)(now - g_rx_ms)) / 1000.0)
                    : "no master snapshot yet";
    string lots = StringFormat("%s x%.2f%s", EnumToString(InpLotMode), InpLotValue, InpReverse ? "  REVERSE" : "");
-   Comment(StringFormat("JB Copier SLAVE v%s  |  %s\nchannel %s @ %s\n%s\ncopies %d  floating %.2f  |  %s%s%s%s",
+   Comment(StringFormat("MT5 Copier SLAVE v%s  |  %s\nchannel %s @ %s\n%s\ncopies %d  floating %.2f  |  %s%s%s%s",
                         SLAVE_VERSION, g_state, InpChannel, g_http.BaseUrl(), master, g_copies, g_floating, lots,
                         InpDailyLossLimit > 0 ? StringFormat("  |  day P/L %.2f", g_day_pl) : "",
                         g_last_action != "" ? "\nlast action: " + g_last_action : "",
@@ -812,14 +813,14 @@ int OnInit()
   {
    if(InpSlaveKey == "")
      {
-      Alert("JB Copier slave: set InpSlaveKey (see copy_server.json)");
+      Alert("MT5 Copier slave: set InpSlaveKey (see copy_server.json)");
       return INIT_PARAMETERS_INCORRECT;
      }
    if(InpChannel == "" || StringFind(InpChannel, "/") >= 0 || InpMagic <= 0 || InpLotValue <= 0)
       return INIT_PARAMETERS_INCORRECT;
    if(!g_http.Init(InpTransport, InpServerUrl, InpSlaveKey))
      {
-      Alert("JB Copier slave: ", g_http.error);
+      Alert("MT5 Copier slave: ", g_http.error);
       return INIT_PARAMETERS_INCORRECT;
      }
    string pairs[];
@@ -827,7 +828,7 @@ int OnInit()
    for(int i = 0; i < ArraySize(pairs); i++)
      {
       int eq = StringFind(pairs[i], "=");
-      if(eq <= 0) { Alert("JB Copier slave: bad InpSymbolMap entry ", pairs[i]); return INIT_PARAMETERS_INCORRECT; }
+      if(eq <= 0) { Alert("MT5 Copier slave: bad InpSymbolMap entry ", pairs[i]); return INIT_PARAMETERS_INCORRECT; }
       int n = ArraySize(g_map_from);
       ArrayResize(g_map_from, n + 1);
       ArrayResize(g_map_to, n + 1);
@@ -839,18 +840,18 @@ int OnInit()
    if(!IsAll(InpMagicAllow)) SplitList(InpMagicAllow, mags);
    for(int i = 0; i < ArraySize(mags); i++)
      {
-      if(StringToInteger(mags[i]) == 0 && mags[i] != "0") { Print("JBCS: '", mags[i], "' is not a magic number - ignored"); continue; }
+      if(StringToInteger(mags[i]) == 0 && mags[i] != "0") { Print("CopySlave: '", mags[i], "' is not a magic number - ignored"); continue; }
       int n = ArraySize(g_magic_allow);
       ArrayResize(g_magic_allow, n + 1);
       g_magic_allow[n] = StringToInteger(mags[i]);
      }
 
-   g_gv = StringFormat("JBCS.%I64d.", InpMagic);
+   g_gv = StringFormat("CopySlave.%I64d.", InpMagic);
    g_trade.SetExpertMagicNumber(InpMagic);
    g_trade.SetDeviationInPoints(InpSlippagePts);
    g_trade.LogLevel(LOG_LEVEL_ERRORS);
 
-   PrintFormat("JBCS v%s: channel '%s' <- %s via %s, lots %s x%.2f, max age %d s, max deviation %d pts, magic %I64d%s",
+   PrintFormat("CopySlave v%s: channel '%s' <- %s via %s, lots %s x%.2f, max age %d s, max deviation %d pts, magic %I64d%s",
                SLAVE_VERSION, InpChannel, g_http.BaseUrl(), EnumToString(InpTransport), EnumToString(InpLotMode),
                InpLotValue, InpMaxSignalAgeSec, InpMaxDeviationPts, InpMagic, InpReverse ? ", REVERSE" : "");
    EventSetMillisecondTimer(MathMax(20, InpPollMs));
@@ -875,7 +876,7 @@ void OnTimer()
      {
       g_hedging = AccountInfoInteger(ACCOUNT_MARGIN_MODE) == ACCOUNT_MARGIN_MODE_RETAIL_HEDGING;
       g_hedging_checked = true;
-      if(!g_hedging) Alert("JB Copier slave needs a HEDGING account - copying is disabled on this netting account");
+      if(!g_hedging) Alert("MT5 Copier slave needs a HEDGING account - copying is disabled on this netting account");
      }
    if(g_id == "" && connected)
      {
